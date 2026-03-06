@@ -1,0 +1,83 @@
+{
+  "id": "kimi-search",
+  "name": "Kimi Search",
+  "description": "Combined KimiCode search and fetch tools for OpenClaw.",
+  "version": "0.1.0",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "userAgent": {
+        "type": "string"
+      },
+      "commonHeaders": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        }
+      },
+      "search": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "baseUrl": {
+            "type": "string"
+          },
+          "timeoutSeconds": {
+            "type": "integer",
+            "minimum": 1,
+            "default": 30
+          },
+          "customHeaders": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "fetch": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "baseUrl": {
+            "type": "string"
+          },
+          "enableService": {
+            "type": "boolean",
+            "default": true
+          },
+          "customHeaders": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "uiHints": {
+    "userAgent": {
+      "label": "User Agent",
+      "advanced": true
+    },
+    "commonHeaders": {
+      "label": "Common Headers",
+      "advanced": true
+    },
+    "search.baseUrl": {
+      "label": "Search URL"
+    },
+    "search.timeoutSeconds": {
+      "label": "Search Timeout (s)",
+      "advanced": true
+    },
+    "fetch.baseUrl": {
+      "label": "Fetch URL"
+    },
+    "fetch.enableService": {
+      "label": "Enable Fetch Service"
+    }
+  }
+}
