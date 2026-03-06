@@ -28,6 +28,8 @@ def load_config():
     # Override with environment variables
     if os.getenv("OPENAI_API_KEY"):
         config["openai_api_key"] = os.getenv("OPENAI_API_KEY")
+    if os.getenv("OPENAI_BASE_URL"):
+        config["openai_base_url"] = os.getenv("OPENAI_BASE_URL")
     if os.getenv("STABILITY_API_KEY"):
         config["stability_api_key"] = os.getenv("STABILITY_API_KEY")
     if os.getenv("FAL_KEY"):
@@ -36,15 +38,19 @@ def load_config():
     return config
 
 
-def generate_openai(prompt, api_key, size="1024x1024", model="dall-e-3"):
-    """Generate image using OpenAI DALL-E"""
+def generate_openai(prompt, api_key, size="1024x1024", model="dall-e-3", base_url=None):
+    """Generate image using OpenAI DALL-E or compatible API"""
     try:
         from openai import OpenAI
     except ImportError:
         print("Error: openai package not installed. Run: pip install openai")
         sys.exit(1)
     
-    client = OpenAI(api_key=api_key)
+    client_args = {"api_key": api_key}
+    if base_url:
+        client_args["base_url"] = base_url
+    
+    client = OpenAI(**client_args)
     
     response = client.images.generate(
         model=model,
@@ -173,12 +179,13 @@ def main():
     try:
         if args.provider == "openai":
             api_key = config.get("openai_api_key")
+            base_url = config.get("openai_base_url")
             if not api_key:
                 print("Error: OpenAI API key not found. Set OPENAI_API_KEY environment variable.")
                 sys.exit(1)
             
             model = args.model or "dall-e-3"
-            image = generate_openai(args.prompt, api_key, args.size, model)
+            image = generate_openai(args.prompt, api_key, args.size, model, base_url)
         
         elif args.provider == "stability":
             api_key = config.get("stability_api_key")
