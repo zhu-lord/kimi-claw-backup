@@ -1,16 +1,16 @@
 {
   "meta": {
     "lastTouchedVersion": "2026.2.13",
-    "lastTouchedAt": "2026-03-06T07:22:43.291Z"
+    "lastTouchedAt": "2026-03-09T15:50:54.164Z"
   },
   "env": {
     "KIMI_API_KEY": "sk-kimi-FjK3NHipSIPyDIoHFAW0k1gDdpYDVwtyFyjUULgTTg4FMabQDE8Rak8hyXe4wySb",
     "KIMI_PLUGIN_API_KEY": "sk-kimi-FjK3NHipSIPyDIoHFAW0k1gDdpYDVwtyFyjUULgTTg4FMabQDE8Rak8hyXe4wySb"
   },
   "wizard": {
-    "lastRunAt": "2026-02-14T17:31:32.848Z",
+    "lastRunAt": "2026-03-09T15:47:37.288Z",
     "lastRunVersion": "2026.2.13",
-    "lastRunCommand": "configure",
+    "lastRunCommand": "doctor",
     "lastRunMode": "local"
   },
   "browser": {
@@ -43,12 +43,6 @@
             "id": "k2p5",
             "name": "k2p5",
             "reasoning": true,
-            "contextWindow": 262144,
-            "maxTokens": 32768,
-            "headers": {
-              "User-Agent": "Kimi Claw Plugin",
-              "X-Kimi-Claw-ID": "19cc1ef3-00a2-82a9-8000-00005d889ddb"
-            },
             "input": [
               "text"
             ],
@@ -57,6 +51,12 @@
               "output": 0,
               "cacheRead": 0,
               "cacheWrite": 0
+            },
+            "contextWindow": 262144,
+            "maxTokens": 32768,
+            "headers": {
+              "User-Agent": "Kimi Claw Plugin",
+              "X-Kimi-Claw-ID": "19cc1ef3-00a2-82a9-8000-00005d889ddb"
             }
           }
         ]
@@ -78,6 +78,7 @@
         "mode": "safeguard"
       },
       "thinkingDefault": "high",
+      "heartbeat": {},
       "maxConcurrent": 4,
       "subagents": {
         "maxConcurrent": 8
@@ -96,6 +97,21 @@
     "dmScope": "main"
   },
   "channels": {
+    "telegram": {
+      "enabled": true,
+      "dmPolicy": "pairing",
+      "botToken": "8796390182:AAGMti_XxB7I7vJ5UCDq2yu8NUbq_utdJic",
+      "groups": {
+        "*": {
+          "requireMention": true
+        },
+        "\"*\"": {
+          "requireMention": true
+        }
+      },
+      "groupPolicy": "allowlist",
+      "streamMode": "partial"
+    },
     "feishu": {
       "appId": "cli_a920c10b6d391cbb",
       "appSecret": "zbPzIROsBmmaKJtLRF6tgeQDYx6BpLRp",
@@ -103,6 +119,9 @@
       "groupPolicy": "open",
       "requireMention": true,
       "enabled": true
+    },
+    "qqbot": {
+      "enabled": false
     }
   },
   "gateway": {
@@ -195,6 +214,12 @@
             "baseUrl": "https://api.kimi.com/coding"
           }
         }
+      },
+      "telegram": {
+        "enabled": true
+      },
+      "qqbot": {
+        "enabled": false
       }
     },
     "installs": {
